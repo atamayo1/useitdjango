@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Area for members</h2>
+
+<p>
+    Welcome <b>{{request.user.username}}</b>,
+    this page is exclusive for the sign up users
+</p>
+
+<p>
+    {% for post in posts %}
+    <div class="card my-4" style="width: 100%;">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRFjUMXMCOEDg5AK5FhOpod-WCVhc0DfsJse7twfHHKp4WNG6ak" class="m-3" style="width: 100px;" alt="">
+                </div>
+                <div class="col-8">
+                    <h5 class="card-title">{{ post.name }}</h5>
+                    <p class="card-text">{{ post.description }}</p>
+                    <p class="card-text">Fix id: {{ post.fix_id }}</p>
+</div>
+</div>
+<a class="btn btn-success" href="/edit_post/{{ post.id }}"><i class="fas fa-pen-square"></i></a>
+<a class="btn btn-danger" href="/delete_post/{{ post.id }}"
+   onClick="return confirm('¿Seguro que quieres borrar a {{post.name}}?');">
+    <i class="fas fa-trash"></i>
+</a>
+<a class="btn btn-primary" href="/add_comment"><i class="fas fa-comment"></i></a>
+</div>
+</div>
+{% for comment in comments %}
+{% if post.fix_id == comment.fix_id %}
+<div class="card mx-5 my-4" style="width: 100%;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-4">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRFjUMXMCOEDg5AK5FhOpod-WCVhc0DfsJse7twfHHKp4WNG6ak" class="m-3" style="width: 100px;" alt="">
+            </div>
+            <div class="col-8">
+                <h5 class="card-title">{{ comment.name }}</h5>
+                <p class="card-text">{{ comment.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+{% endfor %}
+<hr />
+<a class="btn btn-primary" href="/add_post">Create post</a>
+</p>
+
+
+{% endblock content %}
+
