@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.urls import path
 from useit_api import views
-from useit_api.api import UserAPI, PostList, CommentList, Login, Logout
+from useit_api.api import UserAPI, PostList, CommentList
 
 urlpatterns = [
     path('api/users', UserAPI.as_view(), name="users"),
     path('api/post_list', PostList.as_view(), name = 'post_list'),
     path('api/comment_list', CommentList.as_view(), name = 'comment_list'),
+    #path('api/like_list', LikeList.as_view(), name = 'like_list'),
     path('', views.welcome),
     path('register', views.register),
     path('login', views.login),

@@ -54,3 +54,15 @@ class CommentSerializer(serializers.Serializer):
             instance.fix_id = validate_data.get('fix_id')
             instance.save()
             return instance
+
+"""class LikeSerializer(serializers.Serializer):
+    id = serializers.ReadOnlyField()
+    like = serializers.IntegerField()
+    fix_id = serializers.IntegerField()
+
+    def create(self, validate_data):
+            instance = Like()
+            instance.like = validate_data.get('like')
+            instance.fix_id = validate_data.get('fix_id')
+            instance.save()
+            return instance"""

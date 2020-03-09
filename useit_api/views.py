@@ -12,6 +12,7 @@ def welcome(request):
     if request.user.is_authenticated:
          posts = Post.objects.all().order_by('-fix_id')
          comments = Comment.objects.all()
+         #likes = Like.objects.all()
 
          return render(request, "welcome.html", {'posts': posts, 'comments': comments} )
 
