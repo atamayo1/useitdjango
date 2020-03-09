@@ -4,9 +4,12 @@
 <h2>Area for members</h2>
 
 <p>
-    Welcome <b>{{request.user.username}}</b>,
+    Welcome <b>{{request.user.first_name}}</b>,
     this page is exclusive for the sign up users
 </p>
+
+<a class="btn btn-primary" href="/add_post">Create new post</a>
+<hr />
 
 <p>
     {% for post in posts %}
@@ -27,7 +30,7 @@
    onClick="return confirm('¿Seguro que quieres borrar a {{post.name}}?');">
     <i class="fas fa-trash"></i>
 </a>
-<a class="btn btn-primary" href="/add_comment"><i class="fas fa-comment"></i></a>
+<a class="btn btn-primary" href="/add_comment/{{post.id}}"><i class="fas fa-comment"></i></a>
 </div>
 </div>
 {% for comment in comments %}
@@ -48,8 +51,6 @@
 {% endif %}
 {% endfor %}
 {% endfor %}
-<hr />
-<a class="btn btn-primary" href="/add_post">Create post</a>
 </p>
 
 
