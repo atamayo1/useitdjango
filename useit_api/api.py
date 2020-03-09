@@ -58,7 +58,20 @@ class UserAPI(generics.ListCreateAPIView):
         else:
             return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
-class Login(FormView):
+"""class LikeList(generics.ListCreateAPIView):
+        queryset = Like.objects.all()
+        serializer_class = LikeSerializer
+        permission_classes = (IsAuthenticated,)
+        authentication_class = (TokenAuthentication,)
+        def post(self, request):
+                serializer = LikeSerializer(data = request.data)
+                if serializer.is_valid():
+                    like = serializer.save()
+                    return Response(serializer.data, status = status.HTTP_201_CREATED)
+                else:
+                    return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)"""
+
+"""class Login(FormView):
     template_name = "login.html"
     form_class = AuthenticationForm
     success_url = reverse_lazy('useit_api:post_list')
@@ -82,4 +95,4 @@ class Logout(APIView):
     def get(self,request, format = None):
         request.user.auth_token.delete()
         logout(request)
-        return Response(status = status.HTTP_200_OK)
+        return Response(status = status.HTTP_200_OK)"""

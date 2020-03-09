@@ -16,12 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.authtoken import views
-from useit_api.api import Login, Logout
+#from useit_api.api import Login, Logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(('useit_api.urls', 'useit_api'))),
-    path('api_login/',Login.as_view(), name = 'login'),
-    path('api_logout/', Logout.as_view()),
+    #path('api_login/',Login.as_view(), name = 'login'),
+    #path('api_logout/', Logout.as_view()),
     path('api_generate_token/', views.obtain_auth_token)
 ]

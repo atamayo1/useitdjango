@@ -11,3 +11,9 @@ class  CommentForm(ModelForm):
         model = Comment
         fields = ['name', 'description', 'fix_id']
 
+"""class LikeForm(ModelForm)
+    class Meta:
+        model = Like
+        fields = ['like', 'fix_id']"""
+
+
