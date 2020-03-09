@@ -43,7 +43,6 @@ def login(request):
             password = form.cleaned_data['password']
 
             user = authenticate(username=username, password=password)
-            token,_ = Token.objects.get_or_create(user = user)
             if user is not None:
                 do_login(request, user)
                 return redirect('/')
@@ -51,7 +50,6 @@ def login(request):
     return render(request, "login.html", {'form': form})
 
 def logout(request):
-    request.user.auth_token.delete()
     do_logout(request)
     return redirect('/')
 
