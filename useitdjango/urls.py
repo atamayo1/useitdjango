@@ -14,19 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from useit_register import views
-from useit_register.api import UserAPI
+from django.urls import path, include
+from rest_framework.authtoken import views
+from useit_api.api import Login, Logout
 
 urlpatterns = [
-    path('', views.welcome),
-    path('register', views.register),
-    path('login', views.login),
-    path('logout', views.logout),
-    path('add_post', views.add_post),
-    path('edit_post/<int:post_id>', views.edit_post),
-    path('delete_post/<int:post_id>', views.delete_post),
-    path('add_comment', views.add_comment),
     path('admin/', admin.site.urls),
-    path('useit_register/1.0/', UserAPI.as_view(), name = "useit_register")
+    path('', include(('useit_api.urls', 'useit_api'))),
+    path('api_login/',Login.as_view(), name = 'login'),
+    path('api_logout/', Logout.as_view()),
+    path('api_generate_token/', views.obtain_auth_token)
 ]

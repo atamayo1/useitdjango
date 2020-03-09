@@ -6,10 +6,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout as do_logout
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
+from rest_framework.authtoken.models import Token
 
 def welcome(request):
     if request.user.is_authenticated:
-         posts = Post.objects.all()
+         posts = Post.objects.all().order_by('-fix_id')
          comments = Comment.objects.all()
 
          return render(request, "welcome.html", {'posts': posts, 'comments': comments} )
@@ -41,7 +42,7 @@ def login(request):
             password = form.cleaned_data['password']
 
             user = authenticate(username=username, password=password)
-
+            token,_ = Token.objects.get_or_create(user = user)
             if user is not None:
                 do_login(request, user)
                 return redirect('/')
@@ -49,6 +50,7 @@ def login(request):
     return render(request, "login.html", {'form': form})
 
 def logout(request):
+    request.user.auth_token.delete()
     do_logout(request)
     return redirect('/')
 
@@ -84,9 +86,10 @@ def delete_post(request, post_id):
 
     return redirect('/')
 
-def add_comment(request):
+def add_comment(request, post_id):
     form = CommentForm()
-
+    form.fields['fix_id'].initial = post_id
+    form.fields['fix_id'].widget.attrs['readonly'] = True
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -95,3 +98,5 @@ def add_comment(request):
             return redirect('/')
 
     return render(request, "add_comment.html", {'form': form})
+
+

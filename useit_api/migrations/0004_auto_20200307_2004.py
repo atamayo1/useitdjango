@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('useit_register', '0003_auto_20200307_1930'),
+        ('useit_api', '0003_auto_20200307_1930'),
     ]
 
     operations = [
